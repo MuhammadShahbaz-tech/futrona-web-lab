@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { initScrollTrigger } from "./animations";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
@@ -11,7 +14,13 @@ import WebAssembly from "./pages/WebAssembly/WebAssembly";
 import AI from "./pages/AI/AI";
 import Future from "./pages/Future/Future";
 
+
 function App() {
+    useEffect(() => {
+        const cleanup = initScrollTrigger();
+
+        return cleanup;
+    }, []);
     return (
         <BrowserRouter>
             <main className="app">

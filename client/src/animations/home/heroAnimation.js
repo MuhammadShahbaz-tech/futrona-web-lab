@@ -7,7 +7,7 @@ function heroAnimation() {
 
     const eyebrow = section.querySelector(".home-hero__eyebrow");
     const title = section.querySelector(".home-hero__title");
-    const titleSpans = section.querySelector(".home-hero__title span");
+    const titleSpans = section.querySelectorAll(".home-hero__title span");
     const description = section.querySelector(".home-hero__description");
     const meta = section.querySelector(".home-hero__meta");
 
@@ -37,14 +37,14 @@ function heroAnimation() {
                 y: 0,
                 duration: 0.8,
             })
-
             .to(
-                title, {
+                title,
+                {
                     opacity: 1,
                     y: 0,
                     duration: 0.6,
                 },
-                "-=0.4",
+                "-=0.4"
             )
             .to(
                 titleSpans,
@@ -61,14 +61,15 @@ function heroAnimation() {
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8
+                    duration: 0.8,
                 },
                 "-=0.5"
             )
             .to(
-                meta, {
+                meta,
+                {
                     opacity: 1,
-                    duration: 0,
+                    y: 0,
                     duration: 0.8,
                 },
                 "-=0.6"
@@ -77,6 +78,5 @@ function heroAnimation() {
 
     return () => context.revert();
 }
-
 
 export default heroAnimation;
