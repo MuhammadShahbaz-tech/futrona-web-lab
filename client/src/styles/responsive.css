@@ -1,0 +1,36 @@
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --container-padding: 24px;
+
+        --space-lg:48px;
+        --space-2xl: 72px;
+        --spcec-3xl: 96px
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 16px;
+
+        --space-lg: 40px;
+        --space-2xl: 56px;
+        --space-3xl: 72px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
