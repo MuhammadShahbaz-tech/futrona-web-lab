@@ -1,4 +1,14 @@
+import { useEffect } from "react";
+
+import introductionAnimation from "../../../animations/home/introductionAnimation";
+
 function Introduction() {
+    useEffect(() => {
+        const cleanup = introductionAnimation();
+
+        return cleanup;
+    }, []);
+
     return (
         <section className="home-introduction section">
             <div className="container">

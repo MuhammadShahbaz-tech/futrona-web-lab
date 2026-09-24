@@ -1,3 +1,8 @@
+import { useEffect } from "react";
+import labPreviewAnimation from "../../../animations/home/labPreviewAnimation";
+
+
+
 const technologies = [
     {
         number: "01",
@@ -50,6 +55,12 @@ const technologies = [
 ];
 
 function LabPreview() {
+
+    useEffect(() => {
+        const cleanup = labPreviewAnimation();
+
+        return cleanup;
+    }, []);
     return (
         <section className="home-lab-preview section">
             <div className="container">

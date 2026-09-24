@@ -1,0 +1,311 @@
+/* ========================================
+   FUTURE WEB LAB — MOTION PAGE
+   ======================================== */
+
+.motion-page {
+    width: 100%;
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.motion-hero {
+    min-height: 100svh;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding: var(--space-13) 0 var(--space-10);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.motion-hero__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+
+    padding-bottom: var(--space-5);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.motion-hero__header span {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+
+    letter-spacing: 0.08em;
+}
+
+.motion-hero__content {
+    padding-top: var(--space-10);
+}
+
+.motion-hero__eyebrow {
+    margin-bottom: var(--space-8);
+
+    color: var(--color-accent);
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.motion-hero__title {
+    max-width: 1200px;
+
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: var(--weight-medium);
+
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+
+    text-transform: uppercase;
+}
+
+.motion-hero__title span {
+    display: block;
+    color: var(--color-text-muted);
+}
+
+.motion-hero__title span:last-child {
+    color: var(--color-accent);
+}
+
+.motion-hero__description {
+    max-width: 440px;
+
+    margin-top: var(--space-10);
+
+    color: var(--color-text-muted);
+
+    font-size: var(--text-base);
+    line-height: 1.8;
+}
+
+/* ========================================
+   INTRODUCTION
+   ======================================== */
+
+.motion-introduction {
+    padding: var(--space-13) 0;
+}
+
+.motion-introduction__header {
+    padding-bottom: var(--space-5);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.motion-introduction__header span {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+
+    letter-spacing: 0.08em;
+}
+
+.motion-introduction__content {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(280px, 1fr);
+
+    gap: var(--space-10);
+
+    padding-top: var(--space-10);
+}
+
+.motion-introduction__title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+
+    font-weight: var(--weight-medium);
+
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+
+    text-transform: uppercase;
+}
+
+.motion-introduction__title span {
+    display: block;
+    color: var(--color-text-muted);
+}
+
+.motion-introduction__description {
+    align-self: end;
+
+    max-width: 420px;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--text-base);
+    line-height: 1.8;
+}
+
+/* ========================================
+   EXPERIMENTS
+   ======================================== */
+
+.motion-experiments {
+    padding: 0 0 var(--space-13);
+}
+
+.motion-experiments__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: var(--space-6);
+
+    padding-bottom: var(--space-5);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.motion-experiments__header > span {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+
+    letter-spacing: 0.08em;
+}
+
+.motion-experiments__header p {
+    color: var(--color-text-muted);
+
+    font-size: var(--text-sm);
+    line-height: 1.6;
+
+    text-align: right;
+}
+
+.motion-experiments__list {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.motion-experiment {
+    display: grid;
+
+    grid-template-columns: 80px 1fr auto;
+
+    align-items: center;
+
+    gap: var(--space-6);
+
+    padding: var(--space-7) 0;
+
+    border-bottom: 1px solid var(--color-border-soft);
+
+    transition:
+        padding var(--duration-normal) var(--ease-standard),
+        background-color var(--duration-normal) var(--ease-standard);
+}
+
+.motion-experiment:last-child {
+    border-bottom: 0;
+}
+
+.motion-experiment:hover {
+    padding-inline: var(--space-4);
+}
+
+.motion-experiment__number {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+}
+
+.motion-experiment__info h3 {
+    margin-bottom: var(--space-2);
+
+    font-size: clamp(1.5rem, 3vw, 3rem);
+
+    font-weight: var(--weight-medium);
+
+    line-height: 1;
+
+    letter-spacing: -0.035em;
+}
+
+.motion-experiment__info p {
+    max-width: 560px;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+.motion-experiment__arrow {
+    color: var(--color-accent);
+
+    font-size: var(--text-xl);
+
+    transition:
+        transform var(--duration-normal) var(--ease-standard);
+}
+
+.motion-experiment:hover .motion-experiment__arrow {
+    transform: translate(4px, -4px);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .motion-hero {
+        padding-bottom: var(--space-9);
+    }
+
+    .motion-hero__title {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+    }
+
+    .motion-introduction__content {
+        grid-template-columns: 1fr;
+    }
+
+    .motion-experiment {
+        grid-template-columns: 40px 1fr auto;
+
+        gap: var(--space-4);
+    }
+}
+
+@media (max-width: 480px) {
+    .motion-hero {
+        min-height: 90svh;
+    }
+
+    .motion-hero__header,
+    .motion-experiments__header {
+        flex-direction: column;
+    }
+
+    .motion-experiments__header p {
+        text-align: left;
+    }
+
+    .motion-experiment {
+        padding: var(--space-6) 0;
+    }
+
+    .motion-experiment:hover {
+        padding-inline: 0;
+    }
+
+    .motion-experiment__info p {
+        display: none;
+    }
+}
