@@ -1,14 +1,7 @@
-/* ========================================
-   FUTURE WEB LAB — MOTION PAGE
-   ======================================== */
-
 .motion-page {
     width: 100%;
 }
 
-/* ========================================
-   HERO
-   ======================================== */
 
 .motion-hero {
     min-height: 100svh;
@@ -258,10 +251,6 @@
 .motion-experiment:hover .motion-experiment__arrow {
     transform: translate(4px, -4px);
 }
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
 
 @media (max-width: 768px) {
     .motion-hero {

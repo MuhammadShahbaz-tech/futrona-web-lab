@@ -179,11 +179,16 @@
 .home-lab-preview__arrow {
     color: var(--color-accent);
     font-size: var(--text-xl);
+
+    transition:
+        transform var(--duration-normal) var(--ease-standard);
 }
 
-/* ========================================
-   RESPONSIVE
-   ======================================== */
+/*.home-lab-preview:hover .home-lab-preview__arrow {
+    transform: translate(4px, -4px);
+} */
+
+
 
 @media (max-width: 768px) {
     .home-hero {
