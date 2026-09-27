@@ -1,4 +1,13 @@
+import { useEffect } from "react";
+import gsapExperiments from "../../../animations/motion/gsapExperiments";
+
 function Experiments() {
+    useEffect(() => {
+        const cleanup = gsapExperiments();
+
+        return cleanup;
+    }, []);
+
     return (
         <section className="motion-experiments section">
             <div className="container">
@@ -30,6 +39,7 @@ function Experiments() {
                         <span className="motion-experiment__arrow">
                             ↗
                         </span>
+                        <span className="motion-experiment__line"></span>
                     </article>
 
                     <article className="motion-experiment">
@@ -49,6 +59,7 @@ function Experiments() {
                         <span className="motion-experiment__arrow">
                             ↗
                         </span>
+                        <span className="motion-experiment__line"></span>
                     </article>
 
                     <article className="motion-experiment">
@@ -68,6 +79,7 @@ function Experiments() {
                         <span className="motion-experiment__arrow">
                             ↗
                         </span>
+                        <span className="motion-experiment__line"></span>
                     </article>
 
                     <article className="motion-experiment">
@@ -87,6 +99,7 @@ function Experiments() {
                         <span className="motion-experiment__arrow">
                             ↗
                         </span>
+                        <span className="motion-experiment__line"></span>
                     </article>
                 </div>
             </div>

@@ -252,6 +252,19 @@
     transform: translate(4px, -4px);
 }
 
+.motion-experiment__line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--color-accent);
+    pointer-events: none;
+}
+
+
 @media (max-width: 768px) {
     .motion-hero {
         padding-bottom: var(--space-9);
