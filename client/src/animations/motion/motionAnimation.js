@@ -174,8 +174,8 @@ function motionAnimation() {
             );
 
             const experimentsItems = experiments.querySelectorAll(
-    ".motion-experiment"
-);
+                ".motion-experiment"
+            );
 
             gsap.set(experimentsHeader, {
                 opacity: 0,
