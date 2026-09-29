@@ -265,6 +265,19 @@
     pointer-events: none;
 }
 
+.motion-experiment__info h3 {
+    view-transition-name: motion-experiment-title;
+}
+
+::view-transition-old(motion-experiment-title),
+::view-transition-new(motion-experiment-title) {
+    animation-duration: 0.4s;
+}
+
+.motion-experiment__title-active {
+    letter-spacing: 0.02em;
+    transform: scale(1.03);
+}
 
 @media (max-width: 768px) {
     .motion-hero {
