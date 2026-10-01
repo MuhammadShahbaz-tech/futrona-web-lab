@@ -7,5 +7,10 @@
     "client": "npm --prefix client run dev",
     "client:build": "npm --prefix client run build",
     "client:preview": "npm --prefix client run preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "three": "^0.186.1"
   }
 }
