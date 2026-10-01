@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./ThreeD.css";
 
 import threeDAnimation from "../../animations/threeD/threeDAnimation";
+import SceneSection from "../../sections/ThreeD/Scene/SceneSection";
 
 import Hero from "./../../sections/ThreeD/Hero/Hero";
 import Introduction from "../../sections/ThreeD/Introduction/Introduction";
@@ -11,7 +12,7 @@ function ThreeD() {
     useEffect(() => {
         const cleanupThreeD = threeDAnimation();
 
-        return () =>{
+        return () => {
             cleanupThreeD?.();
         };
     }, []);
@@ -20,7 +21,8 @@ function ThreeD() {
         <main className="threed-page">
             <Hero />
             <Introduction />
-            <Experiments/>
+            <Experiments />
+            <SceneSection />
         </main>
     )
 }
