@@ -1,4 +1,39 @@
-function Experiments() {
+function Experiments({
+    activeExperiment,
+    setActiveExperiment,
+}) {
+
+    const experiments = [
+        {
+            id: "scene",
+            number: "01",
+            title: "SCENE",
+            description:
+                "Building interactive 3D environments with objects, cameras, and spatial composition.",
+        },
+        {
+            id: "materials",
+            number: "02",
+            title: "MATERIALS",
+            description:
+                "Exploring surfaces, textures, lighting, and real-time visual properties.",
+        },
+        {
+            id: "camera",
+            number: "03",
+            title: "CAMERA",
+            description:
+                "Creating depth and perspective through controlled camera movement.",
+        },
+        {
+            id: "interaction",
+            number: "04",
+            title: "INTERACTION",
+            description:
+                "Connecting user input with objects, movement, and spatial behavior.",
+        },
+    ];
+
     return (
         <section className="threed-experiments section">
             <div className="container">
@@ -13,81 +48,33 @@ function Experiments() {
                 </div>
 
                 <div className="threed-experiments__list">
-                    <article className="threed-experiment">
-                        <span className="threed-experiment__number">
-                            01
-                        </span>
+                    {experiments.map((experiment) => (
+                        <article
+                            key={experiment.id}
+                            className={`threed-experiment ${
+                                activeExperiment === experiment.id
+                                    ? "is-active"
+                                    : ""
+                            }`}
+                            onClick={() =>
+                                setActiveExperiment(experiment.id)
+                            }
+                        >
+                            <span className="threed-experiment__number">
+                                {experiment.number}
+                            </span>
 
-                        <div className="threed-experiment__info">
-                            <h3>SCENE</h3>
+                            <div className="threed-experiment__info">
+                                <h3>{experiment.title}</h3>
 
-                            <p>
-                                Building interactive 3D environments with
-                                objects, cameras, and spatial composition.
-                            </p>
-                        </div>
+                                <p>{experiment.description}</p>
+                            </div>
 
-                        <span className="threed-experiment__arrow">
-                            ↗
-                        </span>
-                    </article>
-
-                    <article className="threed-experiment">
-                        <span className="threed-experiment__number">
-                            02
-                        </span>
-
-                        <div className="threed-experiment__info">
-                            <h3>MATERIALS</h3>
-
-                            <p>
-                                Exploring surfaces, textures, lighting, and
-                                real-time visual properties.
-                            </p>
-                        </div>
-
-                        <span className="threed-experiment__arrow">
-                            ↗
-                        </span>
-                    </article>
-
-                    <article className="threed-experiment">
-                        <span className="threed-experiment__number">
-                            03
-                        </span>
-
-                        <div className="threed-experiment__info">
-                            <h3>CAMERA</h3>
-
-                            <p>
-                                Creating depth and perspective through
-                                controlled camera movement.
-                            </p>
-                        </div>
-
-                        <span className="threed-experiment__arrow">
-                            ↗
-                        </span>
-                    </article>
-
-                    <article className="threed-experiment">
-                        <span className="threed-experiment__number">
-                            04
-                        </span>
-
-                        <div className="threed-experiment__info">
-                            <h3>INTERACTION</h3>
-
-                            <p>
-                                Connecting user input with objects,
-                                movement, and spatial behavior.
-                            </p>
-                        </div>
-
-                        <span className="threed-experiment__arrow">
-                            ↗
-                        </span>
-                    </article>
+                            <span className="threed-experiment__arrow">
+                                ↗
+                            </span>
+                        </article>
+                    ))}
                 </div>
             </div>
         </section>

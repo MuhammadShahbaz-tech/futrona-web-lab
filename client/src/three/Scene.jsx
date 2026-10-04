@@ -3,21 +3,31 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Object3D from "./Object";
+import { roughness } from "three/src/nodes/core/PropertyNode.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function CameraRig() {
+function CameraRig({ activeExperiment }) {
     useFrame((state) => {
         const camera = state.camera;
 
-        const targetX = state.pointer.x * 0.5;
-        const targetY = state.pointer.y * 0.3;
+        let targetX = state.pointer.x * 0.5;
+        let targetY = state.pointer.y * 0.3;
+        let targetZ = 5;
 
+        if (activeExperiment === "camera") {
+            targetX = state.pointer.x * 1.2;
+            targetY = state.pointer.y * 0.8;
+            targetZ = 4;
+        }
         camera.position.x +=
             (targetX - camera.position.x) * 0.03;
 
         camera.position.y +=
             (targetY - camera.position.y) * 0.03;
+
+        camera.position.z +=
+            (targetZ - camera.position.z) * 0.03;
 
         camera.lookAt(0, 0, 0);
     });
@@ -59,7 +69,7 @@ function SceneMotion({ children }) {
     );
 }
 
-function Scene() {
+function Scene({ activeExperiment }) {
     return (
         <Canvas
             shadows
@@ -70,7 +80,9 @@ function Scene() {
         >
             <fog attach="fog" args={["#111111", 4, 10]} />
 
-            <CameraRig />
+            <CameraRig
+                activeExperiment={activeExperiment}
+            />
 
             <ambientLight intensity={1} />
 
@@ -91,22 +103,72 @@ function Scene() {
                 <Object3D
                     position={[0, 0, 0]}
                     scale={1}
-                    metalness={0.8}
-                    roughness={0.2}
+                    metalness={activeExperiment === "materials"
+                        ? 1.0
+                        : 0.8}
+                    roughness={activeExperiment === "materials"
+                        ? 0.1
+                        : 0.3}
+                />
+
+                <Object3D
+                    position={[0, 0, 0]}
+                    scale={1}
+                    metalness={
+                        activeExperiment === "materials"
+                            ? 1
+                            : 0.8
+                    }
+                    roughness={
+                        activeExperiment === "materials"
+                            ? 0.05
+                            : 0.2
+                    }
+                />
+
+                <Object3D
+                    position={[0, 0, 0]}
+                    scale={1}
+                    metalness={
+                        activeExperiment === "materials"
+                            ? 1
+                            : 0.8
+                    }
+                    roughness={
+                        activeExperiment === "materials"
+                            ? 0.05
+                            : 0.2
+                    }
                 />
 
                 <Object3D
                     position={[-2.2, 0.3, -1.5]}
                     scale={0.55}
-                    metalness={0.4}
-                    roughness={0.5}
+                    metalness={
+                        activeExperiment === "materials"
+                            ? 0.9
+                            : 0.4
+                    }
+                    roughness={
+                        activeExperiment === "materials"
+                            ? 0.1
+                            : 0.5
+                    }
                 />
 
                 <Object3D
                     position={[2.2, 0.3, -2]}
                     scale={0.55}
-                    metalness={0.2}
-                    roughness={0.75}
+                    metalness={
+                        activeExperiment === "materials"
+                            ? 0.8
+                            : 0.2
+                    }
+                    roughness={
+                        activeExperiment === "materials"
+                            ? 0.15
+                            : 0.75
+                    }
                 />
             </SceneMotion>
 

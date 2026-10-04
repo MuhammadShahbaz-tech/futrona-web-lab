@@ -11,7 +11,7 @@ function threeDAnimation() {
     const context = gsap.context(() =>  {
         const hero = page.querySelector(".threed-hero");
 
-        if(!hero) {
+        if(hero) {
             const header = hero.querySelector(
                 ".threed-hero__header"
             );

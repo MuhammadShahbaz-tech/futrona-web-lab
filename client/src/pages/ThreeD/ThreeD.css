@@ -179,9 +179,7 @@
 
     cursor: pointer;
 
-    transition:
-        border-color 0.3s ease,
-        /* opacity 0.3s ease; */
+    transition: border-color 0.3s ease;
 }
 
 .threed-experiment__number {
@@ -238,7 +236,7 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: var(--space-5);
-    border-bottom: 1px solid (--color-border);
+    border-bottom: 1px solid var(--color-border);
     color: var(--color-text-subtle);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
@@ -256,6 +254,19 @@
     display: block;
     width: 100% !important;
     height: 100% !important;
+}
+
+.threed-experiment.is-active {
+    border-color: var(--color-border);
+}
+
+.threed-experiment.is-active .threed-experiment__arrow {
+    color: var(--color-text);
+    transform: translate(4px, -4px);
+}
+
+.threed-experiment.is-active .threed-experiment__number {
+    color: var(--color-text);
 }
 
 
