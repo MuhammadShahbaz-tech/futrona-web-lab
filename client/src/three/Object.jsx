@@ -6,6 +6,7 @@ function Object3D({
     scale = 1,
     metalness = 0.7,
     roughness = 0.25,
+    interactionMode = false,
 }) {
     const meshRef = useRef();
     const [hovered, setHovered] = useState(false);
@@ -14,8 +15,12 @@ function Object3D({
     useFrame((state) => {
         if (!meshRef.current) return;
 
-        const targetX = state.pointer.y * 0.4;
-        const targetY = state.pointer.x * 0.4;
+        const rotationStrength = interactionMode
+            ? 0.9
+            : 0.4;
+
+        const targetX = state.pointer.y * rotationStrength;
+        const targetY = state.pointer.x * rotationStrength;
 
         meshRef.current.rotation.x +=
             (targetX - meshRef.current.rotation.x) * 0.08;
@@ -23,7 +28,15 @@ function Object3D({
         meshRef.current.rotation.y +=
             (targetY - meshRef.current.rotation.y) * 0.08;
 
-        meshRef.current.rotation.z += active ? 0.012 : 0.003;
+        const rotationSpeed = interactionMode
+            ? active
+                ? 0.025
+                : 0.008
+            : active   
+                ? 0.012
+                : 0.003
+
+        meshRef.current.rotation.z += rotationSpeed;
 
         const time = state.clock.getElapsedTime();
 
@@ -34,10 +47,18 @@ function Object3D({
                 meshRef.current.position.y
             ) * 0.03;
 
+        const hoverScale = interactionMode
+            ? 1.2
+            : 1.12;
+
+        const activeScale = interactionMode
+            ? 1.35
+            : 1.25        
+
         const targetScale = active
-            ? 1.25
+            ? activeScale
             : hovered
-                ? 1.12
+                ? hoverScale
                 : 1;
 
         meshRef.current.scale.x +=

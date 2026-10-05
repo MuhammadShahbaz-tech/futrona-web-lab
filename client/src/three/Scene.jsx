@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Object3D from "./Object";
-import { roughness } from "three/src/nodes/core/PropertyNode.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,32 +102,9 @@ function Scene({ activeExperiment }) {
                 <Object3D
                     position={[0, 0, 0]}
                     scale={1}
-                    metalness={activeExperiment === "materials"
-                        ? 1.0
-                        : 0.8}
-                    roughness={activeExperiment === "materials"
-                        ? 0.1
-                        : 0.3}
-                />
-
-                <Object3D
-                    position={[0, 0, 0]}
-                    scale={1}
-                    metalness={
-                        activeExperiment === "materials"
-                            ? 1
-                            : 0.8
+                    interactionMode={
+                        activeExperiment === "interaction"
                     }
-                    roughness={
-                        activeExperiment === "materials"
-                            ? 0.05
-                            : 0.2
-                    }
-                />
-
-                <Object3D
-                    position={[0, 0, 0]}
-                    scale={1}
                     metalness={
                         activeExperiment === "materials"
                             ? 1
@@ -144,6 +120,9 @@ function Scene({ activeExperiment }) {
                 <Object3D
                     position={[-2.2, 0.3, -1.5]}
                     scale={0.55}
+                    interactionMode={
+                        activeExperiment === "interaction"
+                    }
                     metalness={
                         activeExperiment === "materials"
                             ? 0.9
@@ -159,6 +138,9 @@ function Scene({ activeExperiment }) {
                 <Object3D
                     position={[2.2, 0.3, -2]}
                     scale={0.55}
+                    interactionMode={
+                        activeExperiment === "interaction"
+                    }
                     metalness={
                         activeExperiment === "materials"
                             ? 0.8
