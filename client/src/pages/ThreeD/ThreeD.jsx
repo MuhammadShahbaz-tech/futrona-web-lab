@@ -13,12 +13,14 @@ function ThreeD() {
 
     
     useEffect(() => {
-        const cleanupThreeD = threeDAnimation();
+        const cleanupThreeD = threeDAnimation(
+            activeExperiment
+        );
 
         return () => {
             cleanupThreeD?.();
         };
-    }, []);
+    }, [activeExperiment]);
 
     return (
         <main className="threed-page">

@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function threeDAnimation() {
+function threeDAnimation(activeExperiment) {
     const page = document.querySelector(".threed-page");
 
     if(!page) return;
@@ -127,6 +127,21 @@ function threeDAnimation() {
                     },
                 }
             );
+        }
+
+        const status = page.querySelector(
+            "threed-scene__status"
+        );
+
+        if(status) {
+            gsap.from(status.children, {
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.08,
+                ease: "power3.out",
+                delay: 0.2,
+            });
         }
     }, page);
 
