@@ -1,0 +1,46 @@
+.webgl-hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+.webgl-hero__content{
+    width: 100%;
+}
+
+.webgl-hero__eyebrow {
+  margin-bottom: var(--space-4);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.webgl-hero__meta {
+  margin-bottom: var(--space-8);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.webgl-hero__title{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+}
+
+.webgl-hero__title span{
+    display: block;
+}
+
+.webgl-hero__description{
+    max-width: 32rem;
+    margin-top: var(--space-8);
+    font-size: 1rem;
+    line-height: 1.5;
+}
