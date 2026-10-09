@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import "./Experiments.css";
 
 const experiments = [
@@ -6,25 +6,26 @@ const experiments = [
     number: "01",
     title: "SHADER SPACE",
     description:
-      "Procedural graphics generated directly on the GPU using fragment shaders.",
+      "Procedural radial waves generated on the GPU, responding to pointer movement.",
   },
   {
     number: "02",
     title: "LIQUID FIELD",
     description:
-      "A fluid visual system driven by mathematical noise and real-time interaction.",
+      "A fluid-like visual field shaped by animated mathematics and mouse interaction.",
   },
   {
     number: "03",
     title: "PARTICLE GRID",
     description:
-      "Thousands of GPU-driven particles responding to movement and spatial forces.",
+      "A procedural grid of animated points rendered through a fragment shader.",
   },
 ];
 
-const Experiments = () => {
-  const [activeExperiment, setActiveExperiment] = useState(0);
-
+const Experiments = ({
+  activeExperiment,
+  onExperimentChange,
+}) => {
   const active = experiments[activeExperiment];
 
   return (
@@ -47,8 +48,8 @@ const Experiments = () => {
           </h2>
 
           <p className="webgl-experiments__description">
-            Experimental graphics systems exploring how shaders, particles,
-            mathematics, and interaction can work together in real time.
+            Experimental graphics systems exploring how shaders,
+            particles, mathematics, and interaction work together in real time.
           </p>
         </div>
 
@@ -60,7 +61,6 @@ const Experiments = () => {
 
           <div className="webgl-experiments__panel-content">
             <h3>{active.title}</h3>
-
             <p>{active.description}</p>
           </div>
 
@@ -69,12 +69,9 @@ const Experiments = () => {
               <button
                 key={experiment.number}
                 type="button"
-                className={
-                  activeExperiment === index
-                    ? "is-active"
-                    : ""
-                }
-                onClick={() => setActiveExperiment(index)}
+                className={activeExperiment === index ? "is-active" : ""}
+                aria-pressed={activeExperiment === index}
+                onClick={() => onExperimentChange(index)}
               >
                 <span>{experiment.number}</span>
                 <span>{experiment.title}</span>

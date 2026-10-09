@@ -1,9 +1,10 @@
+
 import { useEffect, useRef } from "react";
 import "./Canvas.css";
 
 import webglRenderer from "../../../webgl/webglRenderer";
 
-const Canvas = () => {
+const Canvas = ({ activeExperiment }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -11,24 +12,12 @@ const Canvas = () => {
 
     if (!canvas) return;
 
-    const cleanup = webglRenderer(canvas);
- 
+    const cleanup = webglRenderer(canvas, activeExperiment);
+
     return () => {
-        cleanup?.();
+      cleanup?.();
     };
-    
-    const context =
-      canvas.getContext("webgl") ||
-      canvas.getContext("experimental-webgl");
-
-    if (!context) {
-      console.error("WebGL is not supported by this browser.");
-      return;
-    }
-
-    context.clearColor(0, 0, 0, 1);
-    context.clear(context.COLOR_BUFFER_BIT);
-  }, []);
+  }, [activeExperiment]);
 
   return (
     <section className="webgl-canvas">
