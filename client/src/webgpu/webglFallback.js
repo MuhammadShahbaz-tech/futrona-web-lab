@@ -114,7 +114,7 @@ export function initWebGLFallback(canvas, onStatus = () => { }) {
         color += vec3(0.35, 0.45, 1.0) * spokeGlow * 0.22;
         color += vec3(0.2, 0.35, 1.0) * glow * 0.4;
 
-      } else if (uMode < 2.5) {
+      } else if (uMode < 3.5) {
         // New experiment: ENERGY WAVES
         for (int i = 0; i < 7; i++) {
           float layer = float(i);
