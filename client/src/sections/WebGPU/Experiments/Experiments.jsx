@@ -27,6 +27,22 @@ const experiments = [
       "Explore the programmable stages that transform geometry into pixels through a modern GPU rendering pipeline.",
     detail: "PIPELINE / RENDER",
   },
+  {
+    number: "04",
+    title: "ENERGY WAVES",
+    category: "INTERACTIVE GRAPHICS",
+    description:
+      "Explore flowing energy waves, luminous blue filaments, and cursor-responsive light in a real-time visual field.",
+    detail: "LIGHT / ENERGY",
+  },
+  {
+    number: "05",
+    title: "CURSOR FIELD",
+    category: "POINTER INTERACTION",
+    description:
+      "Interact with a responsive light field where glowing energy follows your cursor and creates dynamic visual reactions.",
+    detail: "INPUT / RESPONSE",
+  },
 ];
 
 const Experiments = ({ onExperimentChange }) => {
@@ -59,9 +75,8 @@ const Experiments = ({ onExperimentChange }) => {
         <div className="webgpu-experiments__list">
           {experiments.map((experiment, index) => (
             <button
-              className={`webgpu-experiments__item ${
-                activeIndex === index ? "is-active" : ""
-              }`}
+              className={`webgpu-experiments__item ${activeIndex === index ? "is-active" : ""
+                }`}
               key={experiment.number}
               type="button"
               aria-pressed={activeIndex === index}
