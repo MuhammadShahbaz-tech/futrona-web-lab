@@ -37,11 +37,11 @@ const experiments = [
   },
   {
     number: "05",
-    title: "CURSOR FIELD",
-    category: "POINTER INTERACTION",
+    title: "GRAVITY WELL",
+    category: "SPATIAL DISTORTION",
     description:
-      "Interact with a responsive light field where glowing energy follows your cursor and creates dynamic visual reactions.",
-    detail: "INPUT / RESPONSE",
+      "A gravitational field of luminous rings and flowing energy, distorted by cursor movement.",
+    detail: "GRAVITY / DISTORTION",
   },
 ];
 

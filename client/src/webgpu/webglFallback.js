@@ -151,31 +151,85 @@ export function initWebGLFallback(canvas, onStatus = () => { }) {
         color += vec3(0.15, 0.5, 1.0) * cursorWave * cursorInfluence * 0.8;
 
       } else {
-        // New experiment: CURSOR FIELD
-        float cursorInfluence = exp(-distanceFromMouse * 7.0);
+        
+        // 05 — PARTICLE VORTEX
 
-        float fieldWave = sin(
-          centered.x * 18.0
-          + sin(centered.y * 12.0 + uTime) * 2.0
-          - uTime * 1.8
+        vec2 vortexCenter = mouse;
+        vec2 delta = centered - vortexCenter;
+
+        float radius = length(delta);
+        float angle = atan(delta.y, delta.x);
+
+        // Swirling motion around the cursor
+        float swirl = angle
+            - uTime * 1.2
+            - 1.8 / (radius + 0.15);
+
+        // Multiple spiral arms
+        float spiralPattern = sin(
+            swirl * 5.0
+            + radius * 24.0
+            - uTime * 0.8
         );
 
-        float fieldLines = exp(
-          -abs(fieldWave - centered.y * 12.0) * 2.5
+        float spiral = exp(-abs(spiralPattern) * 5.0);
+        spiral *= exp(-radius * 1.4);
+
+        // Procedural particle grid
+        vec2 grid = centered * 42.0;
+        vec2 cell = floor(grid);
+        vec2 local = fract(grid) - 0.5;
+
+        float seed = hash21(cell);
+        float particleAngle = seed * 6.2831853;
+
+        float particleRadius = length(local);
+        float particleDrift = uTime * (0.5 + seed);
+
+        vec2 particleOffset = vec2(
+            cos(particleAngle + particleDrift),
+            sin(particleAngle + particleDrift)
+        ) * 0.18;
+
+        vec2 particlePos = local - particleOffset;
+
+        float particleSize = 0.045 + seed * 0.07;
+
+        float particle = 1.0 - smoothstep(
+            particleSize,
+            particleSize + 0.025,
+            length(particlePos)
         );
 
-        float rippleDistance = distanceFromMouse;
-        float ripple = abs(
-          fract(rippleDistance * 12.0 - uTime * 0.8) - 0.5
-        );
+        // Brightness fades toward the outer edges
+        float particleFade = exp(-radius * 1.5);
 
-        float rippleGlow = 1.0 - smoothstep(0.02, 0.12, ripple);
-        rippleGlow *= exp(-rippleDistance * 2.5);
+        // Glowing vortex core
+        float core = exp(-radius * 20.0);
+        float halo = exp(-radius * 5.0);
 
-        color += vec3(0.08, 0.2, 0.6) * fieldLines * 0.65;
-        color += vec3(0.05, 0.7, 1.0) * cursorInfluence * 0.9;
-        color += vec3(0.1, 0.45, 1.0) * rippleGlow * 0.8;
-      }
+        // Cursor interaction
+        float cursorGlow = exp(-length(delta) * 8.0);
+
+        color += vec3(0.04, 0.12, 0.4)
+            * spiral * 0.55;
+
+        color += vec3(0.08, 0.4, 1.0)
+            * spiral * 0.65;
+
+        color += vec3(0.15, 0.65, 1.0)
+            * particle * particleFade * 1.2;
+
+        color += vec3(0.05, 0.45, 1.0)
+            * halo * 0.65;
+
+        color += vec3(0.4, 0.9, 1.0)
+            * core;
+
+        color += vec3(0.1, 0.5, 1.0)
+            * cursorGlow * 0.25;
+
+      } 
 
 
       ${isWebGL2 ? "outColor = vec4(color, 1.0);" : "gl_FragColor = vec4(color, 1.0);"}
