@@ -36,19 +36,53 @@ fn fragmentMain(
 
   var color = vec3<f32>(0.015, 0.02, 0.05);
 
-  if (uniforms.mode < 0.5) {
-    // Experiment 1: flowing wave field.
-    let wave = sin(
-      centered.x * 12.0
-      + sin(centered.y * 8.0 + time) * 2.0
-      - time * 1.5
-    );
+  
+if (uniforms.mode < 0.5) {
+  // Experiment 1: interactive flowing wave field.
 
-    let lines = exp(-abs(wave - centered.y * 8.0) * 3.0);
+  let mouseDistance = length(centered - mouse);
 
-    color += vec3<f32>(0.12, 0.22, 0.65) * lines;
-    color += vec3<f32>(0.18, 0.45, 1.0) * glow * 0.6;
-  } else if (uniforms.mode < 1.5) {
+  // Localized cursor influence.
+  let mouseInfluence = exp(-mouseDistance * 4.0);
+
+  // Multiple flowing wave layers.
+  let waveA = sin(
+    centered.x * 11.0
+    + sin(centered.y * 7.0 + time * 0.8) * 1.6
+    - time * 1.4
+  );
+
+  let waveB = sin(
+    centered.x * 7.0
+    - centered.y * 5.0
+    + time * 0.65
+  );
+
+  // Distort the primary wave around the cursor.
+  let distortion = mouseInfluence * 0.65;
+
+  let distortedWave = waveA
+    + sin(mouseDistance * 18.0 - time * 2.0) * distortion;
+
+  let waveLineA = exp(
+    -abs(distortedWave - centered.y * 7.0) * 3.2
+  );
+
+  let waveLineB = exp(
+    -abs(waveB - centered.y * 4.0) * 4.0
+  );
+
+  // Soft atmospheric light around the cursor.
+  let cursorGlow = exp(-mouseDistance * 5.0);
+
+  // Subtle animated background illumination.
+  let ambient = 0.5 + 0.5 * sin(time * 0.35 + centered.x * 2.0);
+
+  color += vec3<f32>(0.08, 0.18, 0.48) * waveLineA;
+  color += vec3<f32>(0.12, 0.38, 0.85) * waveLineB * 0.55;
+  color += vec3<f32>(0.18, 0.48, 1.0) * cursorGlow * 0.65;
+  color += vec3<f32>(0.025, 0.045, 0.10) * ambient;
+} else if (uniforms.mode < 1.5) {
     // Experiment 2: animated particle-like field.
     let grid = uv * vec2<f32>(48.0 * aspect, 48.0);
     let cell = floor(grid);

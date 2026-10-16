@@ -108,7 +108,7 @@ export async function initWebGPURenderer(canvas, onStatus = () => {}) {
       const rect = canvas.getBoundingClientRect();
 
       mouseX = (event.clientX - rect.left) / rect.width;
-      mouseY = (event.clientY - rect.top) / rect.height;
+      mouseY = 1 - (event.clientY - rect.top) / rect.height;
     };
 
     canvas.addEventListener("pointermove", handlePointerMove);

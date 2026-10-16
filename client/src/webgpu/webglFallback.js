@@ -828,7 +828,7 @@ export function initWebGLFallback(canvas, onStatus = () => { }) {
 
       if (rect.width > 0 && rect.height > 0) {
         mouseX = (event.clientX - rect.left) / rect.width;
-        mouseY = (event.clientY - rect.top) / rect.height;
+        mouseY = 1 - (event.clientY - rect.top) / rect.height;
       }
     };
 
