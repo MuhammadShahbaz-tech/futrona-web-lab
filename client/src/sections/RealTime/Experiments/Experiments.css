@@ -1,0 +1,193 @@
+
+.realtime-experiments {
+  padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 4vw, 4rem);
+  background: #08090c;
+  color: #f3f4f6;
+}
+
+.realtime-experiments__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #292d34;
+  color: #8b929d;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.realtime-experiments__heading {
+  max-width: 1100px;
+  margin: clamp(4rem, 8vw, 7rem) auto;
+}
+
+.realtime-experiments__eyebrow {
+  color: #64e4d2;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.realtime-experiments__heading h2 {
+  margin: 1.5rem 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+}
+
+.realtime-experiments__heading h2 span {
+  color: #858c98;
+}
+
+.realtime-experiments__description {
+  max-width: 500px;
+  color: #a1a7b1;
+  line-height: 1.8;
+}
+
+.realtime-experiments__panel {
+  max-width: 1100px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid #292d34;
+  background: #0d1015;
+}
+
+.realtime-experiments__panel-header,
+.realtime-experiments__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  color: #8b929d;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.realtime-experiments__panel-header {
+  border-bottom: 1px solid #292d34;
+}
+
+.realtime-experiments__connection {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.realtime-experiments__status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #64e4d2;
+  box-shadow: 0 0 12px rgba(100, 228, 210, 0.6);
+}
+
+.realtime-experiments__feed {
+  min-height: 250px;
+}
+
+.realtime-experiments__event {
+  display: grid;
+  grid-template-columns: 90px 1fr 100px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #20242b;
+  animation: realtime-event-enter 250ms ease both;
+}
+
+.realtime-experiments__event-type {
+  color: #64e4d2;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.realtime-experiments__event p {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+.realtime-experiments__event-time {
+  color: #777f8b;
+  font-size: 0.72rem;
+  text-align: right;
+}
+
+.realtime-experiments__actions {
+  border-top: 1px solid #292d34;
+  letter-spacing: normal;
+}
+
+.realtime-experiments__actions p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.realtime-experiments__actions button {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #64e4d2;
+  background: transparent;
+  color: #64e4d2;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.realtime-experiments__actions button:hover {
+  background: #64e4d2;
+  color: #08090c;
+}
+
+.realtime-experiments__actions button span {
+  margin-left: 0.75rem;
+}
+
+@keyframes realtime-event-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 650px) {
+  .realtime-experiments__event {
+    grid-template-columns: 65px 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .realtime-experiments__event-time {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .realtime-experiments__panel-header,
+  .realtime-experiments__actions {
+    padding: 1rem;
+  }
+
+  .realtime-experiments__actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .realtime-experiments__top {
+    font-size: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .realtime-experiments__event {
+    animation: none;
+  }
+}

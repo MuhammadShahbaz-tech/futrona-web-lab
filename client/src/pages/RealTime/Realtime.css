@@ -1,0 +1,4 @@
+.real-time {
+    min-height: 100vh;
+    background: var(--color-background, #08090c);
+}
