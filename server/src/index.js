@@ -4,6 +4,7 @@ import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 
+
 const app = express();
 const httpServer = createServer(app);
 
@@ -54,54 +55,54 @@ io.on("connection", (socket) => {
 
   //WebRTC signaling
 
-  socket.on("webrtc:join", async(roomValue) => {
-    const room = 
+  socket.on("webrtc:join", async (roomValue) => {
+    const room =
       typeof roomValue === "string"
         ? roomValue.trim().slice(0, 50)
         : "";
 
-        if(!room) {
-          socket.emit("webrtc:error", {
-            message: "Please enter a valid room name.",
-          });
-          return
-        }
+    if (!room) {
+      socket.emit("webrtc:error", {
+        message: "Please enter a valid room name.",
+      });
+      return
+    }
 
-        if (socket.data.webrtcRoom) {
-          socket.emit("webrtc:error", {
-            message: "Leave your current WebRTC room before joining another."
-          });
-          return;
-        }
+    if (socket.data.webrtcRoom) {
+      socket.emit("webrtc:error", {
+        message: "Leave your current WebRTC room before joining another."
+      });
+      return;
+    }
 
-        const roomName = `wertc:${room}`;
-        const existingPeers = [
-          ...(io.sockets.adapter.room.get(roomName) || []),
-        ];
+    const roomName = `webrtc:${room}`;
+    const existingPeers = [
+      ...(io.sockets.adapter.rooms.get(roomName) || []),
+    ];
 
-        if(existingPeers.length >= 2) {
-          socket.emit("wertc:error", {
-            message: "This room is full. Only two peers are supported.",
-          });
-          return;
-        }
+    if (existingPeers.length >= 2) {
+      socket.emit("webrtc:error", {
+        message: "This room is full. Only two peers are supported.",
+      });
+      return;
+    }
 
-        await socket.join(roomName);
-        socket.data.webrtcRoom = roomName;
+    await socket.join(roomName);
+    socket.data.webrtcRoom = roomName;
 
-        socket.emit("webrtc:joined", {
-          room,
-          peerId:existingPeers[0] || null,
-          initiator: existingPeers.length === 0,
-        });
+    socket.emit("webrtc:joined", {
+      room,
+      peerId: existingPeers[0] || null,
+      initiator: existingPeers.length === 0,
+    });
 
-        if (existingPeers.length === 1) {
-          io.to(existingPeers[0].emit("webrtc:peer-joined"), {
-            peerId: socket.id,
-          });
-        }
+    if (existingPeers.length === 1) {
+      io.to(existingPeers[0]).emit("webrtc:peer-joined", {
+        peerId: socket.id,
+      });
+    }
 
-        console.log(`WebRTC peer ${socket.id} joined room ${room}`);
+    console.log(`WebRTC peer ${socket.id} joined room ${room}`);
   })
 
   //WebRTC Relay offer
@@ -111,18 +112,26 @@ io.on("connection", (socket) => {
       const target = data?.target;
       const room = socket.data.webrtcRoom;
 
-      if(
+      if (
         !room ||
-        typeof target !== "String" || 
+        typeof target !== "string" ||
         !io.sockets.sockets.get(target) ||
         !io.sockets.adapter.rooms.get(room)?.has(target)
       ) {
+        console.log(`WebRTC signal rejected: ${eventName}`, {
+          sender: socket.id,
+          target,
+          room
+        });
         return
       }
       io.to(target).emit(eventName, {
         ...data,
-        sender:socket.id,
+        sender: socket.id,
       });
+      console.log(
+        `WebRTC signal relayed: ${eventName} from ${socket.id} to ${target}`
+      );
     });
   };
 
@@ -133,7 +142,7 @@ io.on("connection", (socket) => {
   socket.on("webrtc:leave", () => {
     const room = socket.data.webrtcRoom;
 
-    if(!room) return;
+    if (!room) return;
 
     socket.leave(room);
     delete socket.data.webrtcRoom;
@@ -145,9 +154,10 @@ io.on("connection", (socket) => {
     console.log(`WebRTC peer ${socket.id} left room: ${room}`);
   });
 
-  socket.on("disconneting", () => {
-    const room = socket.data.webrtcRoom
-    if(room) {
+  socket.on("disconnecting", () => {
+    const room = socket.data.webrtcRoom;
+
+    if (room) {
       socket.to(room).emit("webrtc:peer-left", {
         peerId: socket.id,
       });
